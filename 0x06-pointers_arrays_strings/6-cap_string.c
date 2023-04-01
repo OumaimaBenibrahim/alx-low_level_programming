@@ -1,35 +1,27 @@
-#include "holberton.h"
+#include "main.h"
 
 /**
- * cap_string - Write a function that capitalizes all words of a string.
+ * cap_string - capitalize all words of a string.
+ * @s: the string to be manipulated.
  *
- * @entry: This is the input string
- *
- * Return: String capitalized
+ * Return: s.
  */
-char *cap_string(char *entry)
+char *cap_string(char *s)
 {
-	int conversion, index, count;
+	int len, j;
+	char sep[13] = {' ', '\t', '\n', ',', ';', '.', '!',
+		'?', '"', '(', ')', '{', '}'};
 
-	char chars[] = {' ', ',', ';', '.', '!',
-			 '?', '"', '(', ')', '{', '}',  '\t', '\n', '\0'};
-	conversion = 32;
-
-	for (index = 0; entry[index] != '\0'; index++)
+	for (len = 0; s[len] != '\0'; len++)
 	{
-		if (entry[index] >= 'index' && entry[index] <= 'z')
-		{
-			entry[index] =  entry[index] - conversion;
-		}
-		conversion = 0;
-		for (count = 0; chars[count] != '\0'; count++)
-		{
-			if (chars[count] == entry[index])
-			{
-				conversion = 32;
-				break;
-			}
-		}
+		if (len == 0 && s[len] >= 97 && s[len] <= 122)
+			s[len] -= 32;
+
+		for (j = 0; j < 13; j++)
+			if (s[len] == sep[j])
+				if (s[len + 1] >= 97 && s[len + 1] <= 122)
+					s[len + 1] -= 32;
 	}
-	return (entry);
+	return (s);
 }
+
